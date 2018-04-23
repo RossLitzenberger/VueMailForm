@@ -1,7 +1,19 @@
 <template>
-  <div id="app">Hello World
+  <div id="app">
+    <email-view></email-view>
   </div>
 </template>
+
+<script>
+import email from "@/views/Email.vue";
+
+export default {
+  name: "app",
+  components: {
+    "email-view": email
+  }
+};
+</script>>
 
 <style lang="less">
 #app {
