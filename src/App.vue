@@ -14,23 +14,40 @@ export default {
   }
 };
 </script>>
-
 <style lang="less">
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  height: 100%;
+  width: 100%;
+}
+body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  background: #2c3e50;
+  font-family: Raleway;
+  color: white;
+  letter-spacing: 1px;
+}
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-    &.router-link-exact-active {
-      color: #42b983;
-    }
+  margin: auto;
+
+  input:not([type="reset"]),
+  textarea {
+    padding: 10px;
+    width: 50vh;
   }
 }
 </style>

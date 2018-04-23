@@ -19,19 +19,23 @@ export default {
     },
     computed: {
       ...BaseInput.computed
+    },
+    methods: {
+      ...BaseInput.methods
     }
   },
-  name: "EmailInput"
+  name: "TextareaInput"
 };
 </script>
-  
+    
 <template>
-  <div>
+  <section>
     <label v-if="label" :for="id">{{label}}</label>
     <textarea
+      ref="input"
+      @input="updateValue"
       :id="id"
-      :placeholder="placeholder"
-      v-bind="$attrs">
+      v-bind="$props">
     </textarea>
-  </div>
+  </section>
 </template>
