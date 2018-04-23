@@ -28,6 +28,10 @@ export default {
     reset(event) {
       event.preventDefault();
       this.$store.dispatch("clearFields");
+    },
+    submitEmail(event) {
+      event.preventDefault();
+      this.$store.dispatch("submit");
     }
   },
   computed: {
@@ -39,15 +43,31 @@ export default {
       set: computedHelper("CC").set
     },
     subjectField: computedHelper("subject"),
-    bodyField: computedHelper("body")
+    bodyField: computedHelper("body"),
+    submitURL() {
+      return this.$store.state.api + "/submit";
+    },
+    submitting() {
+      return this.$store.state.submitting;
+    },
+    success() {
+      return this.$store.state.success;
+    },
+    error() {
+      return this.$store.state.error;
+    }
   }
 };
 </script>
 
 <template>
   <div id="form-wrap">
-    <form id="email" name="email" action="">
-      <header>Send a Friendly Email</header>
+    <form id="email" name="email" method="POST" :action="submitURL" @submit="submitEmail">
+      <header>
+        <p>Send a Friendly Email</p>
+        <p v-if="success">Your email has been sent successfully!</p>
+        <p v-if="error" class="error">A problem has occured, try again.</p>
+        </header>
       <article>
         <search-datalist id="emails"></search-datalist>
         <email-input v-model="toField" label="To" type="email" list="emails" name="to" autocomplete="email" autofocus required="required"></email-input>
@@ -58,7 +78,7 @@ export default {
         </textarea-input>
       </article>
       <footer>
-        <button type="submit">Send an Email</button>
+        <button type="submit" :disabled="submitting">Send an Email</button>
         <input id="cancel" @click="reset" type="reset" value="cancel">
       </footer>
     </form>
@@ -78,13 +98,18 @@ export default {
     width: 100%;
     display: flex;
     align-items: center;
+    flex-direction: column;
     justify-content: center;
-    height: 80px;
+    min-height: 80px;
     font-size: 20px;
     font-weight: bold;
     background: #27ae60;
     border-radius: 10px 10px 0 0;
     color: white;
+
+    p.error {
+      background: #c00f0f;
+    }
   }
   article {
     padding: 10px;

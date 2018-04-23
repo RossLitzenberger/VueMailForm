@@ -18,5 +18,14 @@ export default {
   },
   searching(state, value) {
     state.searching = value;
+  },
+  submitting(state, value) {
+    state.submitting = value;
+  },
+  error(state, value) {
+    state.error = value;
+  },
+  success(state, value) {
+    state.success = value;
   }
 };

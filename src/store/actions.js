@@ -29,5 +29,50 @@ export default {
     });
     commit("users", uniq);
     return Promise.resolve(uniq);
+  },
+  error({ commit }) {
+    commit("success", false);
+    commit("error", true);
+    return Promise.resolve();
+  },
+  success({ commit, dispatch }) {
+    commit("error", false);
+    commit("success", true);
+    return dispatch("clearFields");
+  },
+  submit({ commit, state, dispatch }) {
+    const fields = state.fields;
+    const body = {
+      to: fields.to,
+      subject: fields.subject,
+      body: fields.body
+    };
+    if (fields.cc.length > 0) {
+      body.cc = fields.cc;
+    }
+    commit("submitting", true);
+    return fetch(state.api + "submit", {
+      body: JSON.stringify(body),
+      cache: "no-cache",
+      headers: {
+        "content-type": "application/json"
+      },
+      method: "POST"
+    })
+      .then(res => res.json())
+      .then(json => {
+        if (json.statusCode && json.statusCode !== 200) {
+          dispatch("error");
+        } else {
+          dispatch("success");
+        }
+        return json;
+      })
+      .catch(err => {
+        // sometimes error
+        dispatch("error");
+        console.error(err);
+      })
+      .finally(() => commit("submitting", false));
   }
 };

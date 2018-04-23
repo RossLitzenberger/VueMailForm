@@ -1,11 +1,11 @@
 let controller = null;
 
-function search(name) {
+function search(url, name) {
   if (controller) {
     controller.abort(); // kill previous fetch
   }
   controller = new AbortController();
-  return fetch(`https://trunkclub-ui-takehome.now.sh/search/${name}`, {
+  return fetch(`${url}${name}`, {
     signal: controller.signal
   })
     .then(res => {
@@ -31,7 +31,7 @@ export default function updateEmailsPlugins(store) {
     }
     // Improve with a worker
     if (["updateToField", "updateCCField"].includes(mutation.type)) {
-      search(mutation.payload).then(users => {
+      search(store.state.api + "search/", mutation.payload).then(users => {
         if (users) {
           store.dispatch("users", users);
         }

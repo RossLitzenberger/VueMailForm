@@ -10,13 +10,19 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   strict: true,
   state: {
+    simple: false,
     fields: {
       to: "",
       cc: [],
       subject: "",
       body: ""
     },
-    users: []
+    users: [],
+    searching: false,
+    submitting: false,
+    success: false,
+    error: false,
+    api: `https://trunkclub-ui-takehome.now.sh/`
   },
   getters: {
     CCAsString(state) {
