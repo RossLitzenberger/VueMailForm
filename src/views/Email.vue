@@ -1,9 +1,19 @@
+<script>
+import SearchDatalist from "@/components/SearchDatalist.vue";
+// @ is an alias to /src
+
+export default {
+  name: "email",
+  components: {
+    "search-datalist": SearchDatalist
+  }
+};
+</script>
+
 <template>
     <div>
         <form id="email" name="email" action="">
-            <datalist id="emails">
-            <option value="drew@geedew.com">Drew Wilson</option>
-            </datalist>
+            <search-datalist id="emails"></search-datalist>
             <fieldset>
             <legend>Correspondence</legend>
             <label for="email+to">To</label>
