@@ -1,4 +1,5 @@
 <script>
+// Each input that we create needs to have a unique identifier
 let uid = 0;
 export default {
   name: "BaseInput",
