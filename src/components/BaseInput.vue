@@ -27,11 +27,13 @@ export default {
   data() {
     return {
       // A simple unique id for instance
-      id: `text-${Date.now()}${uid++}`
+      id: `text-${Date.now()}${uid++}`,
+      textValue: ""
     };
   },
   methods: {
     updateValue() {
+      this.textValue = this.$refs.input.value;
       this.$emit("input", this.$refs.input.value);
     }
   }
