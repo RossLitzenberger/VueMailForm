@@ -2,6 +2,7 @@
 import BaseInput from "@/components/BaseInput.vue";
 import EmailInput from "@/components/EmailInput.vue";
 import SearchDatalist from "@/components/SearchDatalist.vue";
+import TextareaInput from "@/components/TextareaInput.vue";
 // @ is an alias to /src
 
 export default {
@@ -9,7 +10,8 @@ export default {
   components: {
     "email-input": EmailInput,
     "base-input": BaseInput,
-    "search-datalist": SearchDatalist
+    "search-datalist": SearchDatalist,
+    "textarea-input": TextareaInput
   }
 };
 </script>
@@ -47,8 +49,11 @@ export default {
           required
         ></base-input>
       <br>
-      <label for="email+body">Body</label>
-      <textarea id="email+body" name="email+body"></textarea>
+      <textarea-input
+          label="Body"
+          placeholder="E.G. Yeah , Bill, let me ask you a real quick question here: How much time would you say you spend each week dealing with these TPS reports?"
+          required>
+        </textarea-input>
       </fieldset>
 
       <input type="reset" value="reset">
