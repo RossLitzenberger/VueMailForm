@@ -30,7 +30,6 @@ export default {
       id: `text-${Date.now()}${uid++}`
     };
   },
-  computed: {},
   methods: {
     updateValue() {
       this.$emit("input", this.$refs.input.value);

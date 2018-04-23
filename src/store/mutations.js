@@ -15,5 +15,8 @@ export default {
   },
   users(state, uniqueUserList) {
     state.users = uniqueUserList;
+  },
+  searching(state, value) {
+    state.searching = value;
   }
 };
