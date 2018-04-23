@@ -19,6 +19,9 @@ export default {
     },
     computed: {
       ...BaseInput.computed
+    },
+    methods: {
+      ...BaseInput.methods
     }
   },
   name: "EmailInput"
@@ -26,11 +29,12 @@ export default {
 </script>
 
 <template>
-  <div>
+  <section>
     <label v-if="label" :for="id">{{label}}</label>
     <input
+      ref="input"
+      @input="updateValue"
       :id="id"
-      :placeholder="placeholder"
-      v-bind="$attrs"> 
-  </div>
+      v-bind="$props"> 
+  </section>
 </template>

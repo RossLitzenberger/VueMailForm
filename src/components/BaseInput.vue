@@ -1,42 +1,51 @@
 <script>
-// Each input that we create needs to have a unique identifier
 let uid = 0;
 export default {
   name: "BaseInput",
   props: {
-    type: {
+    required: {},
+    type: {},
+    list: {},
+    autofocus: {},
+    autocomplete: {},
+    multiple: {},
+    value: {
       type: String,
-      default: "text",
-      validator: val => ["text", "email"].includes(val)
+      default: ""
     },
     placeholder: {
       type: String,
-      default() {
-        return "";
-      }
+      default: ""
     },
     label: {
       type: String,
       validation(label) {
         return label.length > 1;
       }
-    },
-    data() {
-      return {
-        // A simple unique id for instance
-        id: `text-${Date.now()}${uid++}`
-      };
+    }
+  },
+  data() {
+    return {
+      // A simple unique id for instance
+      id: `text-${Date.now()}${uid++}`
+    };
+  },
+  computed: {},
+  methods: {
+    updateValue() {
+      this.$emit("input", this.$refs.input.value);
     }
   }
 };
 </script>
 
 <template>
-  <div>
+  <section>
     <label v-if="label" :for="id">{{label}}</label>
     <input
-        :id="id"
-        :placeholder="placeholder"
-        v-bind="$attrs"> 
-  </div>
+      ref="input"
+      @input="updateValue"
+      :id="id"
+      v-bind="$props"> 
+  </section>
 </template>
