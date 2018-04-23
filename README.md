@@ -3,6 +3,8 @@ This is a very basic display of Vue and Vuex to deliver complex Single File Comp
 
 It is a work in progress.
 
+### This project assumes Chrome 66+ and Node 9+
+
 ## Install
 npm install
 
